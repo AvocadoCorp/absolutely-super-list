@@ -110,3 +110,9 @@ Requirements
 
 A modern flavor of jQuery. Probably something like 1.4.x. Built and tested with 1.7.1.
 
+License
+-------
+
+AbsolutelySuperList is freely distributable under the MIT license.
+
+See LICENSE.txt for full license.

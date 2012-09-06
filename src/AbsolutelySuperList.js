@@ -1,4 +1,11 @@
-(function() {
+/*!
+ * AbsolutelySuperList version 0.1.
+ * http://github.com/AvocadoCorp/absolutely-super-list
+ *
+ * (c) 2012 Avocado Software, Inc.
+ * AbsolutelySuperList is freely distributable under the MIT license.
+ */
+ (function() {
 
 
   var SUPER_ITEM_SELECTOR = '.absolutely-super-item';
