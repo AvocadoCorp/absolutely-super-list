@@ -72,7 +72,7 @@ Sets the content to the given HTML and rebuilds the list.
 
 ### <code>insertAtIndex(html, index)</code>
 
-Inserts the given html (or jQuery item) at the given index.
+Inserts the given HTML (or jQuery item) at the given index.
 
 ### <code>indexBySelector(jQuery)</code>
 
