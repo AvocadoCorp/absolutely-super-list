@@ -11,6 +11,9 @@ resize rows in the list with perfect CSS transitions.
 Visit <a href="//absolutelysuperlist.appspot.com/">http://absolutelysuperlist.appspot.com/</a>
 for a demo and more information.
 
+AbsolutelySuperList was developed for <a href="https://avocado.io/">Avocado</a>&rsquo;s
+killer shared to-do list for couples.
+
 Initialization
 --------------
 
