@@ -1,11 +1,15 @@
 AbsolutelySuperList
 =====================
 
-Demo
-----
+Demo and overview
+-----------------
+
+AbsolutelySuperList takes a mostly normal <code>&lt;ul&gt;</code> or
+<code>&lt;ol&gt;</code> and allows you to insert, remove, rearrange and
+resize rows in the list with perfect CSS transitions.
 
 Visit <a href="//absolutelysuperlist.appspot.com/">http://absolutelysuperlist.appspot.com/</a>
-for a demo.
+for a demo and more information.
 
 Initialization
 --------------
