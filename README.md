@@ -66,7 +66,7 @@ Public API
 
 Returns the number of items in the list.
 
-### <code>html(html)<code>
+### <code>html(html)</code>
 
 Sets the content to the given HTML and rebuilds the list.
 
