@@ -299,10 +299,7 @@
           return;
         }
 
-        var $target = $(evt.target);
-        var $item = $target.closest('.item');
-        var index = superList.indexBySelector($item);
-        superList.removeBySelector($item);
+        superList.removeBySelector($(evt.target));
       });
 
       // Duplicate items.
@@ -315,18 +312,14 @@
 
       // Move items around.
       superList.delegate('.item .move-up', 'click', function(evt) {
-        var $target = $(evt.target);
-        var $item = $target.closest('.item');
-        var from = superList.indexBySelector($item);
+        var from = superList.indexBySelector($(evt.target));
         var to = Math.max(0, from - 1);
         if (from != to) {
           superList.moveItem(from, to);
         }
       });
       superList.delegate('.item .move-down', 'click', function(evt) {
-        var $target = $(evt.target);
-        var $item = $target.closest('.item');
-        var from = superList.indexBySelector($item);
+        var from = superList.indexBySelector($(evt.target));
         var size = superList.length();
         var to = Math.min(size - 1, from + 1);
         if (from != to) {
@@ -339,6 +332,7 @@
 
         var size = superList.length();
         for (var i = 0; i < size; i++) {
+          // Just randomly move each item around like a boss.
           superList.moveItem(i, Math.floor(Math.random() * size));
         }
       });
