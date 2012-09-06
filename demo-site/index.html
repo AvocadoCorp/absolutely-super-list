@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>AbsolutelySuperList demo</title>
+  <style>
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 15px;
+    }
+
+    ul, li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      line-height: 1.4em;
+    }
+
+    h1, h2 {
+      line-height: 1.4em;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 36px;
+    }
+    h2 {
+      font-size: 24px;
+      color: #666;
+    }
+
+    #content {
+      margin: 50px auto;
+      width: 66%;
+    }
+
+    #about,
+    #download {
+      margin: 50px 0;
+    }
+
+    #list {
+      opacity: 0.25;
+
+      margin-bottom: 50px;
+      padding: 0;
+      border-bottom: 1px solid #ccc;
+    }
+      
+    .loaded #list {
+      opacity: 1;
+
+      -moz-transition: background 0.2s ease, height 0.2s ease;
+      -webkit-transition: background 0.2s ease, height 0.2s ease;
+      -ms-transition: background 0.2s ease, height 0.2s ease;
+    }
+
+    #list .item {
+      list-style-type: none;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      border-top: 1px solid #ccc;
+    }
+    #list .item.absolutely-super-dragging-item {
+      border-bottom: 1px solid #ccc;
+    }
+    #list.absolutely-super-dragging {
+      background: #ccc;
+    }
+
+    .absolutely-super-draggable {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      margin-top: -5px;
+    }
+
+    .absolutely-super-draggable,
+    .absolutely-super-draggable img {
+      display: inline-block;
+      width: 20px;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      cursor: move;
+      line-height: 0;
+    }
+    .absolutely-super-draggable img {
+      margin: 2px 0;
+      height: 2px;
+    }
+
+    .item .text {
+      cursor: pointer;
+      margin-left: 45px;
+      margin-right: 250px;
+      display: block;
+      padding: 15px 0;
+    }
+    .item.expanded .text {
+      font-size: 300%;
+    }
+
+    .item .actions {
+      font-size: 80%;
+      line-height: 1.2em;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      margin-top: -0.6em;
+      cursor: pointer;
+    }
+    .item .actions a {
+      color: blue;
+    }
+    .item .actions a:hover {
+      text-decoration: underline;
+    }
+    .item .actions > * {
+      margin-left: 0.5em;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="content">
+    <h1>AbsolutelySuperList</h1>
+    <h2>Janky list animations be damned.</h2>
+
+    <div id="about">
+      <p>
+        <a href="//github.com/AvocadoCorp/absolutely-super-list">AbsolutelySuperList</a>
+        takes a mostly normal <code>&lt;ul&gt;</code> or
+        <code>&lt;ol&gt;</code> and allows you to insert, remove, rearrange and
+        resize rows in the list with perfect CSS transitions &mdash; a feat
+        normally quite difficult to get Just Right™.
+      </p>
+      <p>
+        This is accomplished by measuring and subsequently <strong>absolutely
+        positioning all elements</strong> inside, then applying <strong>CSS
+        transitions</strong> to let the browser handle all the animation.
+        Voilà, no jerkiness as elements are added and removed from the DOM
+        in between JavaScript animations.
+      </p>
+      <p>
+        AbsolutelySuperList was built by
+        <a href="https://twitter.com/taylorhughes">Taylor Hughes</a> for
+        <a href="https://avocado.io/">Avocado</a> &mdash; check it out in action
+        inside our killer shared to-do list for couples.
+      </p>
+    </div>
+
+    <h2 id="demo-header">Demo</h2>
+    <p>
+      Like, whoa:
+      <button id="randomize">
+        Randomize order
+      </button>
+    </p>
+
+    <ul id="list">
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Apples</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Bananas</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Mangos</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Peaches</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Tomatoes</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+      <li class="item">
+        <span class="absolutely-super-draggable">
+          <img src="/static/pixel.gif" alt="Reorder">
+        </span>
+        <span class="text">Watermelons</span>
+        <span class="actions">
+          <a class="remove">Remove</a>
+          <a class="duplicate">Duplicate</a>
+          <span>
+            Move:
+              <a class="move-up">Up</a>
+              <a class="move-down">Down</a>
+          </span>
+        </span>
+      </li>
+    </ul>
+
+
+    <div id="download">
+      <h2>Download</h2>
+      <p>
+        <strong>Github:</strong>
+        <a href="//github.com/AvocadoCorp/absolutely-super-list">AbsolutelySuperList</a>
+      </p>
+      <p>
+        <strong>Download:</strong> (requires jQuery, tested with 1.7.1.)<br>&nbsp;&nbsp;
+        <a href="/static/AbsolutelySuperList-0.1.min.js">AbsolutelySuperList-0.1.min.js</a>
+        (<strong>5.4KB</strong>)
+        &bull;
+        <a href="/static/AbsolutelySuperList-0.1.js">AbsolutelySuperList-0.1.js</a>
+        (<strong>12.4KB</strong>)<br>
+      </p>
+    </div>
+
+  </div>
+
+
+  <script src="/static/jquery-1.7.1.js"></script>
+  <script src="/static/AbsolutelySuperList-0.1.min.js"></script>
+  <script>
+    $(function() {
+
+      var superList = new AbsolutelySuperList($('#list'));
+      superList.bind(AbsolutelySuperList.ITEM_DRAGGED_EVENT,
+          function(evt, fromIndex, toIndex) {
+            // You can do something with this information if you so desire.
+          });
+
+      // Expand items.
+      superList.delegate('.item .text', 'click', function(evt) {
+        var $target = $(evt.target);
+        var $item = $target.closest('.item');
+        $item.toggleClass('expanded');
+        superList.refreshBySelector($item);
+      });
+
+      // Remove items.
+      superList.delegate('.item .remove', 'click', function(evt) {
+        if (superList.length() == 1) {
+          return;
+        }
+
+        var $target = $(evt.target);
+        var $item = $target.closest('.item');
+        var index = superList.indexBySelector($item);
+        superList.removeBySelector($item);
+      });
+
+      // Duplicate items.
+      superList.delegate('.item .duplicate', 'click', function(evt) {
+        var $target = $(evt.target);
+        var $item = $target.closest('.item');
+        var index = superList.indexBySelector($item);
+        superList.insertAtIndex($item.clone(), index + 1);
+      });
+
+      // Move items around.
+      superList.delegate('.item .move-up', 'click', function(evt) {
+        var $target = $(evt.target);
+        var $item = $target.closest('.item');
+        var from = superList.indexBySelector($item);
+        var to = Math.max(0, from - 1);
+        if (from != to) {
+          superList.moveItem(from, to);
+        }
+      });
+      superList.delegate('.item .move-down', 'click', function(evt) {
+        var $target = $(evt.target);
+        var $item = $target.closest('.item');
+        var from = superList.indexBySelector($item);
+        var size = superList.length();
+        var to = Math.min(size - 1, from + 1);
+        if (from != to) {
+          superList.moveItem(from, to);
+        }
+      });
+
+      $('#randomize').click(function(evt) {
+        evt.preventDefault();
+
+        var size = superList.length();
+        for (var i = 0; i < size; i++) {
+          superList.moveItem(i, Math.floor(Math.random() * size));
+        }
+      });
+
+      setTimeout(function() {
+        $(document.body).addClass('loaded');
+      }, 50);
+    });
+  </script>
+</body>
