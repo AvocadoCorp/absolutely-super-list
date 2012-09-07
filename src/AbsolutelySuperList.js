@@ -321,33 +321,6 @@
   };
 
 
-  AbsolutelySuperList.prototype.moveItem = function(fromIndex, toIndex) {
-    var $children = this.$list.children();
-    var length = $children.length;
-    if (fromIndex == toIndex || fromIndex >= length || toIndex >= length) {
-      return;
-    }
-
-    var $item = $children.eq(fromIndex);
-    var $destination = $children.eq(toIndex);
-
-    $item.detach();
-    if (fromIndex > toIndex) {
-      $item.insertBefore($destination);
-    } else {
-      $item.insertAfter($destination);
-    }
-
-    // Do this after so the element is registered at its current coordinates
-    // and Firefox performs the animation when it switches. (Because the DOM
-    // node is removed and re-inserted, it would otherwise be considered
-    // to always have been where it was after this function ends.)
-    setTimeout(bind(function() {
-      this.repositionElements_();
-    }, this), 50);
-  };
-
-
   AbsolutelySuperList.prototype.length = function() {
     return this.$list.children().length;
   };
@@ -387,6 +360,71 @@
 
   AbsolutelySuperList.prototype.removeBySelector = function(selector) {
     this.removeAtIndex(this.indexBySelector(selector));
+  };
+
+
+  AbsolutelySuperList.prototype.moveItem = function(fromIndex, toIndex) {
+    var $children = this.$list.children();
+    var length = $children.length;
+    if (fromIndex == toIndex || fromIndex >= length || toIndex >= length) {
+      return;
+    }
+
+    var $item = $children.eq(fromIndex);
+    var $destination = $children.eq(toIndex);
+
+    $item.detach();
+    if (fromIndex > toIndex) {
+      $item.insertBefore($destination);
+    } else {
+      $item.insertAfter($destination);
+    }
+
+    // Do this after so the element is registered at its current coordinates
+    // and Firefox performs the animation when it switches. (Because the DOM
+    // node is removed and re-inserted, it would otherwise be considered
+    // to always have been where it was after this function ends.)
+    setTimeout(bind(function() {
+      this.repositionElements_();
+    }, this), 50);
+  };
+
+
+  /**
+   * Sort the list using the given callback.
+   *
+   * @param {=function(jQuery, jQuery)} opt_sortFn The sort function, which
+   *     compares two jQuery-wrapped nodes and returns a number for sorting
+   *     per typical JavaScript array sorting functions.
+   */
+  AbsolutelySuperList.prototype.sort = function(opt_sortFn) {
+    var $children = this.$list.children();
+    var length = $children.length;
+
+    var $itemArray = [];
+    for (var i = 0; i < length; i++) {
+      //  Make an array of the actual <li> items within the wrapper items.
+      $itemArray.push($children.eq(i).children());
+    }
+
+    // Default to sorting by the actual text of the item.
+    var sortFn = opt_sortFn || function($itemA, $itemB) {
+      return $itemA.text().localeCompare($itemB.text());
+    };
+    $itemArray.sort(sortFn);
+
+    for (var i = 0; i < length; i++) {
+      // The items inside are the children of the item wrapper.
+      var $item = $itemArray[i].parent();
+      $item.detach();
+      $item.appendTo(this.$list);
+    }
+
+    // Do this after so the element is registered at its current coordinates.
+    // @see {moveItem} for more information.
+    setTimeout(bind(function() {
+      this.repositionElements_();
+    }, this), 50);
   };
 
 
