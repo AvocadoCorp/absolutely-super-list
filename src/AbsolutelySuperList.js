@@ -1,4 +1,4 @@
-/*!
+/**
  * @preserve
  *
  * AbsolutelySuperList version 0.1.
