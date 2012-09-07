@@ -160,6 +160,9 @@
       <button id="randomize">
         Randomize order
       </button>
+      <button id="sort">
+        Sort items
+      </button>
     </p>
 
     <ul id="list">
@@ -291,7 +294,12 @@
 
 
   <script src="/static/jquery-1.8.1.min.js"></script>
-  <script src="/static/AbsolutelySuperList-0.1.min.js"></script>
+  {% if use_latest %}
+    <!-- This can be used for testing new code against the demo. -->
+    <script src="/static/AbsolutelySuperList-latest.js"></script>
+  {% else %}
+    <script src="/static/AbsolutelySuperList-0.1.js"></script>
+  {% endif %}
   <script>
     $(function() {
 
@@ -346,11 +354,14 @@
       $('#randomize').click(function(evt) {
         evt.preventDefault();
 
-        var size = superList.length();
-        for (var i = 0; i < size; i++) {
-          // Just randomly move each item around like a boss.
-          superList.moveItem(i, Math.floor(Math.random() * size));
-        }
+        superList.sort(function() {
+          return Math.random() - 0.5;
+        });
+      });
+      $('#sort').click(function(evt) {
+        evt.preventDefault();
+        
+        superList.sort();
       });
 
       setTimeout(function() {

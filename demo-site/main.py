@@ -23,7 +23,10 @@ from google.appengine.ext.webapp import template
 class MainHandler(webapp2.RequestHandler):
   def get(self):
     path = os.path.join(os.path.dirname(__file__), 'index.html')
-    self.response.out.write(template.render(path, {}))
+    params = {}
+    if self.request.get('use_latest', default_value=False):
+      params['use_latest'] = True
+    self.response.out.write(template.render(path, params))
 
 app = webapp2.WSGIApplication([('/', MainHandler)],
                               debug=False)
