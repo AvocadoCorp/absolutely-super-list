@@ -87,6 +87,17 @@ Removes the given item with animation.
 
 Removes the given item with animation.
 
+### <code>moveItem(fromIndex, toIndex)</code>
+
+Moves the given item to its new position with animation.
+
+### <code>sort(opt_sortFn)</code>
+
+Sorts the list according to the given sort function. The sort function gets $itemA, $itemB
+and should return a number according to normal JavaScript sort function rules.
+
+Defaults to sorting by the $item.text().
+
 ### <code>refreshAtIndex(index)</code>
 
 Refreshes the height of the item at the given index and repositions elements with animation.
