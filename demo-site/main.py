@@ -22,6 +22,10 @@ from google.appengine.ext.webapp import template
 
 class MainHandler(webapp2.RequestHandler):
   def get(self):
+    if self.request.headers.get('host') == 'absolutelysuperlist.appspot.com':
+      self.redirect('http://absolutelysuperlist.avocado.io/', 301)
+      return
+
     path = os.path.join(os.path.dirname(__file__), 'index.html')
     params = {}
     if self.request.get('use_latest', default_value=False):
