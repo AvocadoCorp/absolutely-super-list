@@ -102,7 +102,7 @@ Defaults to sorting by the $item.text().
 
 Refreshes the height of the item at the given index and repositions elements with animation.
 
-### <code>refreshBySelector(jQuery)<code>
+### <code>refreshBySelector(jQuery)</code>
 
 Refreshes the height of the given item and repositions elements with animation.
 
