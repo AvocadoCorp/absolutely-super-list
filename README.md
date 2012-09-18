@@ -8,7 +8,7 @@ AbsolutelySuperList takes a mostly normal <code>&lt;ul&gt;</code> or
 <code>&lt;ol&gt;</code> and allows you to insert, remove, rearrange and
 resize rows in the list with perfect CSS transitions.
 
-Visit <a href="//absolutelysuperlist.appspot.com/">http://absolutelysuperlist.appspot.com/</a>
+Visit <a href="//absolutelysuperlist.avocado.io/">http://absolutelysuperlist.avocado.io/</a>
 for a demo and more information.
 
 AbsolutelySuperList was developed for <a href="https://avocado.io/">Avocado</a>&rsquo;s
