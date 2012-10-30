@@ -1,7 +1,7 @@
 /**
  * @preserve
  *
- * AbsolutelySuperList version 0.1.
+ * AbsolutelySuperList version 0.1.1.
  * http://github.com/AvocadoCorp/absolutely-super-list
  *
  * (c) 2012 Avocado Software, Inc.
@@ -442,6 +442,26 @@
 
   AbsolutelySuperList.prototype.refreshBySelector = function(selector) {
     this.refreshAtIndex(this.indexBySelector(selector));
+  };
+
+
+  AbsolutelySuperList.prototype.topOfItemAtIndex = function(targetIndex) {
+    var totalHeight = 0;
+
+    var $children = this.$list.children();
+    targetIndex = Math.min(targetIndex, $children.length - 1);
+
+    for (var i = 0; i < targetIndex; i++) {
+      var $child = $children.eq(i);
+      totalHeight += $child.data('height');
+    }
+
+    return totalHeight;
+  };
+
+
+  AbsolutelySuperList.prototype.topOfItem = function(selector) {
+    return this.topOfItemAtIndex(this.indexBySelector(selector));
   };
 
 
